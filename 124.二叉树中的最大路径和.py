@@ -38,9 +38,9 @@ class Solution:
         return ans
         
 # @lc code=end
-# tree = TreeNode.build([-1,5,None,4,None,None,None,2,-4])
-# tree = TreeNode.build([-10,9,20,None,None,15,7])
-# tree = TreeNode.build([1,2,3])
-tree = TreeNode.build([-1,5,None,4,None,None,2,-4])
-print(Solution().maxPathSum(tree))
+# print(Solution().maxPathSum(TreeNode.build([-1,5,None,4,None,None,None,2,-4])))
+# print(Solution().maxPathSum(TreeNode.build([-10,9,20,None,None,15,7])))
+# print(Solution().maxPathSum(TreeNode.build([1,2,3])))
+# print(Solution().maxPathSum(TreeNode.build([-1,5,None,4,None,None,2,-4])))
+print(Solution().maxPathSum(TreeNode.build([-1])))
 
