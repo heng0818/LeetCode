@@ -1,44 +1,42 @@
+#
+# @lc app=leetcode.cn id=42 lang=python3
+#
+# [42] 接雨水
+#
 from typing import List
+# @lc code=start
 class Solution:
     def trap(self, height: List[int]) -> int:
-        ans = 0
-        left = 0
-        right = len(height) - 1
-        maxLeft = 0
-        maxRight = 0
-        while left < right:
-            if height[left] < height[right]:
-                if height[left] < maxLeft:
-                    ans = ans + (maxLeft - height[left])
-                else:
-                    maxLeft = height[left]
-                left = left + 1
-            else:
-                if height[right] < maxRight:
-                    ans = ans + (maxRight - height[right])
-                else:
-                    maxRight = height[right]
-                right = right - 1
-        return ans
+        return self.func1(height)
 
-    def trap1(self, height: List[int]) -> int:
+    # 自低向上查（超时）
+    def func1(self, height: List[int]) -> int:
         ans = 0
-        # left = 0
-        # right = len(height) - 1
-        # maxLeft = 0
-        # maxRight = 0
-        # while left < right:
-        #     if height[left] < height[right]:
-        #         if height[left] < maxLeft:
-        #             ans = ans + (maxLeft - height[left])
-        #         else:
-        #             maxLeft = height[left]
-        #         left = left + 1
-        #     else:
-        #         if height[right] < maxRight:
-        #             ans = ans + (maxRight - height[right])
-        #         else:
-        #             maxRight = height[right]
-        #         right = right - 1
+        max_h = max(height)
+        left, right = 0, len(height) - 1
+        while max_h > 0:
+            # 找到两边的墙
+            found = False
+            while right - left > 1:
+                if height[left] != 0 and height[right] != 0:
+                    # 找到两堵墙
+                    found = True
+                    break
+                if height[left] == 0:
+                    left += 1
+                if height[right] == 0:
+                    right -= 1    
+
+            if found:
+                i = left
+                while i <= right:
+                    if i != left and i != right and height[i] == 0:
+                        ans += 1
+                    # 修改墙数据
+                    height[i] = max(0, height[i] - 1)
+                    i += 1
+            max_h -= 1
         return ans
+# @lc code=end
+print(Solution().trap([4,2,0,3,2,5]))
 print(Solution().trap([0,1,0,2,1,0,1,3,2,1,2,1]))
